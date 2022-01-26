@@ -3,6 +3,7 @@ const ctx = canvas.getContext("2d");
 const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
+const clear = document.getElementById("jsClear");
 const saveBtn = document.getElementById("jsSave");
 const INITIAL_COLOR = "#2c2c2c"
 const CANVAS_SIZE_X = document.getElementsByClassName("canvas")[0].offsetWidth;
@@ -72,6 +73,10 @@ function handleCanvasClick(){
     }
 }
 
+function handleClearClick(){
+    ctx.clearRect(0, 0, CANVAS_SIZE_X, CANVAS_SIZE_Y);
+}
+
 function handleCM(event){
     event.preventDefault();
 }
@@ -80,7 +85,7 @@ function handleSaveClick(){
     const image = canvas.toDataURL();          // 디폴트: png 
     const link = document.createElement("a");
     link.href = image;                         // 링크 생성하고 주소 삽입
-    link.download = "PaintJS[export]";         // 다운로드 파일 이름
+    link.download = "PaintJS[✨]";            // 다운로드 파일 이름
     link.click();                              // 링크 클릭해서 다운로드 완료
 }
 
@@ -105,6 +110,10 @@ if(range){
 if(mode){
     mode.addEventListener("click", handleModeClick);
 }
+
+if(clear){
+    clear.addEventListener("click", handleClearClick)
+};
 
 if(saveBtn){
     saveBtn.addEventListener("click", handleSaveClick);
