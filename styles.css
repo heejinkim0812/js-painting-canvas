@@ -48,12 +48,13 @@ body {
   font-weight: 800;
   font-size: 12px;
 }
-.controls .controls_colors {
-  display: flex;
-}
 
 .controls_button button:active {
   transform: scale(0.98);
+}
+
+.controls .controls_colors {
+  display: flex;
 }
 
 .controls_colors .controls_color {

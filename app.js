@@ -1,13 +1,29 @@
 const canvas = document.getElementById("jsCanvas");
 const ctx = canvas.getContext("2d");
 const colors = document.getElementsByClassName("jsColor");
+const range = document.getElementById("jsRange");
+const mode = document.getElementById("jsMode");
+const saveBtn = document.getElementById("jsSave");
+const INITIAL_COLOR = "#2c2c2c"
+const CANVAS_SIZE_X = document.getElementsByClassName("canvas")[0].offsetWidth;
+const CANVAS_SIZE_Y = document.getElementsByClassName("canvas")[0].offsetWidth;
 
-canvas.width = document.getElementsByClassName("canvas")[0].offsetWidth;
-canvas.height = document.getElementsByClassName("canvas")[0].offsetHeight;
-ctx.strokeStyle = "#2c2c2c";
+canvas.width = CANVAS_SIZE_X;
+canvas.height = CANVAS_SIZE_Y;
+
+//Default
+ctx.fillStyle = "white";
+ctx.fillRect(0, 0, CANVAS_SIZE_X, CANVAS_SIZE_Y);
+
+ctx.strokeStyle = INITIAL_COLOR;
+ctx.fillStyle = INITIAL_COLOR;
 ctx.lineWidth = 2.5;
 
 let painting = false;
+let filling = false;
+
+
+/*=====================FUNCTION=====================*/
 
 function stopPainting(){
     painting = false;
@@ -32,15 +48,64 @@ function onMouseMove(event){
 function handleColorClick(event){
     const color = event.target.style.backgroundColor;
     ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+}
+
+function handleRangeChange(event){
+    const size = event.target.value;
+    ctx.lineWidth = size;
+}
+
+function handleModeClick(event){
+    if(filling === true){
+        filling = false;
+        mode.innerText = "Fill";
+    }else{
+        filling = true;
+        mode.innerText = "Paint";
+    }
+}
+
+function handleCanvasClick(){
+    if(filling === true){
+        ctx.fillRect(0, 0, CANVAS_SIZE_X, CANVAS_SIZE_Y);
+    }
+}
+
+function handleCM(event){
+    event.preventDefault();
+}
+
+function handleSaveClick(){
+    const image = canvas.toDataURL();          // 디폴트: png 
+    const link = document.createElement("a");
+    link.href = image;                         // 링크 생성하고 주소 삽입
+    link.download = "PaintJS[export]";         // 다운로드 파일 이름
+    link.click();                              // 링크 클릭해서 다운로드 완료
 }
 
 
+/*=====================EVENT=====================*/
+
 if(canvas){
     canvas.addEventListener("mousemove", onMouseMove);   //마우스 움직임 
-    canvas.addEventListener("mousedown", startPainting); //마우스 클릭 
+    canvas.addEventListener("mousedown", startPainting); //마우스 클릭 상태
     canvas.addEventListener("mouseup", stopPainting);    //마우스 클릭 해제
     canvas.addEventListener("mouseleave", stopPainting); 
+    canvas.addEventListener("click", handleCanvasClick); //마우스 클릭
+    canvas.addEventListener("contextmenu", handleCM);    //오른쪽 마우스 클릭
 }
 
 Array.from(colors).forEach( color => color.addEventListener("click", handleColorClick));
 
+if(range){
+    range.addEventListener("input", handleRangeChange);
+}
+
+if(mode){
+    mode.addEventListener("click", handleModeClick);
+}
+
+if(saveBtn){
+    saveBtn.addEventListener("click", handleSaveClick);
+}
