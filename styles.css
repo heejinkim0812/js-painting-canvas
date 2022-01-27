@@ -64,3 +64,30 @@ body {
   border-radius: 25px;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
+
+.controls_colors .rainbow {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    orange,
+    orange,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet,
+    violet,
+    violet
+  );
+}
+
+.controls_color input[type="color"] {
+  width: 1px;
+  height: 1px;
+  border-radius: 1%;
+  border: none;
+  background-color: transparent;
+  z-index: -1;
+  left: 10px;
+}

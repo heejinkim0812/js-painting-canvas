@@ -5,6 +5,8 @@ const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const clear = document.getElementById("jsClear");
 const saveBtn = document.getElementById("jsSave");
+const jsPicker = document.getElementById("jsPicker");
+const colorPicker = document.getElementById("colorPicker");
 const INITIAL_COLOR = "#2c2c2c"
 const CANVAS_SIZE_X = document.getElementsByClassName("canvas")[0].offsetWidth;
 const CANVAS_SIZE_Y = document.getElementsByClassName("canvas")[0].offsetWidth;
@@ -89,6 +91,16 @@ function handleSaveClick(){
     link.click();                              // 링크 클릭해서 다운로드 완료
 }
 
+function handleClickInput() {
+	colorPicker.click();
+}
+
+function handlePickColor(event) {
+    const savedColor = event.target.value;
+	ctx.strokeStyle = savedColor;
+	ctx.fillStyle = savedColor;
+}
+
 
 /*=====================EVENT=====================*/
 
@@ -117,4 +129,12 @@ if(clear){
 
 if(saveBtn){
     saveBtn.addEventListener("click", handleSaveClick);
+}
+
+if (jsPicker) {
+	jsPicker.addEventListener("click", handleClickInput);
+}
+
+if (colorPicker) {
+	colorPicker.addEventListener("change", handlePickColor);
 }
