@@ -5,7 +5,7 @@ Build a Painting Board using vanilla-javascript
 
 <br/>
 
-## Painting Board
+## Painting Boards
 
 **Feature List**
 
