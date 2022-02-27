@@ -1,7 +1,10 @@
 # js-painting-canvas
 
-Build a Painting Board using vanilla-javascript  
+Build a Painting Board using vanilla-javascript
+
 ✨Demo link: https://heejinkim0812.github.io/js-painting-canvas/
+
+![SharedScreenshot](https://user-images.githubusercontent.com/71063574/155870923-2beed2a7-149e-4870-8928-28c48fa57f57.jpg)
 
 <br/>
 
